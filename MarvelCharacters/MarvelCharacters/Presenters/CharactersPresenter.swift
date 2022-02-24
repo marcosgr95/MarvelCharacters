@@ -10,6 +10,7 @@ import UIKit
 
 protocol CharactersPresenterDelegate: AnyObject {
     func presentCharacters(characters: [MarvelCharacter])
+    func notifyRequestStart()
 }
 
 class CharactersPresenter {
@@ -28,6 +29,7 @@ class CharactersPresenter {
 
         guard !retrievingCharacters else { return }
         retrievingCharacters = true
+        view?.notifyRequestStart()
 
         if initialLoad {
             resetPagination()

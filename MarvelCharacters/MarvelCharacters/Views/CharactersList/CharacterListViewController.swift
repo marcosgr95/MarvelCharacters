@@ -17,6 +17,9 @@ class CharacterListViewController: UIViewController {
 
     var characters = [MarvelCharacter]()
     let presenter = CharactersPresenter()
+    lazy var paginationOngoingView: UIActivityIndicatorView = {
+        return UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
+    }()
 
     // MARK: - Lifecycle methods
 
@@ -51,8 +54,16 @@ extension CharacterListViewController: CharactersPresenterDelegate {
         DispatchQueue.main.async {
             self.characters.append(contentsOf: characters)
             self.tableView.reloadData()
+            self.paginationOngoingView.stopAnimating()
+            self.tableView.tableFooterView = nil
         }
     }
 
+    func notifyRequestStart() {
+        DispatchQueue.main.async {
+            self.paginationOngoingView.startAnimating()
+            self.tableView.tableFooterView = self.paginationOngoingView
+        }
+    }
 
 }

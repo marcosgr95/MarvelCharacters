@@ -16,7 +16,7 @@ class CharacterListViewController: UIViewController {
     // MARK: - Variables
 
     var characters = [MarvelCharacter]()
-    private let presenter = CharactersPresenter()
+    let presenter = CharactersPresenter()
 
     // MARK: - Lifecycle methods
 
@@ -26,7 +26,7 @@ class CharacterListViewController: UIViewController {
         presenter.setDelegate(self)
         setUpTableView()
         applyStyles()
-        presenter.getMarvelCharacters()
+        presenter.getMarvelCharacters(initialLoad: true)
     }
 
     // MARK: - Table methods
@@ -49,7 +49,7 @@ extension CharacterListViewController: CharactersPresenterDelegate {
 
     func presentCharacters(characters: [MarvelCharacter]) {
         DispatchQueue.main.async {
-            self.characters = characters
+            self.characters.append(contentsOf: characters)
             self.tableView.reloadData()
         }
     }

@@ -25,4 +25,12 @@ extension CharacterListViewController: UITableViewDelegate, UITableViewDataSourc
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let focusPosition = scrollView.contentOffset.y
+        let scrollHeight = scrollView.frame.height
+        if focusPosition > tableView.contentSize.height - scrollHeight - 100 {
+            presenter.getMarvelCharacters()
+        }
+    }
+
 }

@@ -16,27 +16,45 @@ class CharactersPresenter {
 
     // MARK: - Variables
 
+    private let limit: Int = 20
+    private var offset: Int = 0
+    private var page: Int = 0
+    private var retrievingCharacters: Bool = false
     weak var view: CharactersPresenterDelegate?
 
     // MARK: - Public methods
 
-    public func getMarvelCharacters() {
-        let ts = "\(Date().timeIntervalSince1970)"
+    public func getMarvelCharacters(initialLoad: Bool = false) {
+
+        guard !retrievingCharacters else { return }
+        retrievingCharacters = true
+
+        if initialLoad {
+            resetPagination()
+        } else {
+            addPage()
+        }
+
+        let timestamp = "\(Date().timeIntervalSince1970)"
 
         guard
             let publicKey = BundleUtils.sharedInstance.retrieveString(key: InfoPlistConstants.kMarvelPublicKey),
             let privateKey = BundleUtils.sharedInstance.retrieveString(key: InfoPlistConstants.kMarvelPrivateKey),
-            let hash = createHash("\(ts)\(privateKey)\(publicKey)")
-        else { return }
+            let hash = createHash("\(timestamp)\(privateKey)\(publicKey)")
+        else {
+            // TODO
+            fatalError("The app can't run because there are no valid credentials to retrieve the required data")
+        }
 
         var components = URLComponents(string: NetworkConstants.kCharactersEndpoint)
         components?.queryItems = [
             URLQueryItem(name: NetworkConstants.kApiKeyParam, value: publicKey),
-            URLQueryItem(name: NetworkConstants.kTimestampParam, value: ts),
             URLQueryItem(name: NetworkConstants.kHashParam, value: hash),
+            URLQueryItem(name: NetworkConstants.kLimitParam, value: String(limit)),
+            URLQueryItem(name: NetworkConstants.kOffsetParam, value: String(offset)),
+            URLQueryItem(name: NetworkConstants.kTimestampParam, value: timestamp),
         ]
-        guard let url = components?.url
-        else {
+        guard let url = components?.url else {
             //TODO display/throw error
             return
         }
@@ -58,18 +76,15 @@ class CharactersPresenter {
                 let responseWrapper = try JSONDecoder().decode(ResponseWrapper.self, from: data)
 
                 self?.view?.presentCharacters(characters: responseWrapper.data.results)
+                self?.retrievingCharacters = false
             } catch {
                 //TODO display/throw error
 
                 print(error)
             }
         }
+
         task.resume()
-
-    }
-
-    public func getMarvelCharacter() {
-
     }
 
     public func setDelegate(_ delegate: CharactersPresenterDelegate) {
@@ -80,5 +95,15 @@ class CharactersPresenter {
 
     private func createHash(_ string: String) -> String? {
         return CryptoUtils.sharedInstance.MD5(string)
+    }
+
+    private func addPage() {
+        page += 1
+        offset += limit * page
+    }
+
+    private func resetPagination() {
+        page = 0
+        offset = 0
     }
 }

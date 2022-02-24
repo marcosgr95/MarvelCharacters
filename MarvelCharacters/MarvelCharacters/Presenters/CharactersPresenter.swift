@@ -9,14 +9,16 @@ import Foundation
 import UIKit
 
 protocol CharactersPresenterDelegate: AnyObject {
-    func presentCharacters(characters: [MarvelCharacter])
     func notifyRequestStart()
+    func presentCharacters(characters: [MarvelCharacter])
+    func presentError(_ error: NetworkingError)
 }
 
 class CharactersPresenter {
 
     // MARK: - Variables
 
+    private var endOfData: Bool = false
     private let limit: Int = 20
     private var offset: Int = 0
     private var page: Int = 0
@@ -27,7 +29,7 @@ class CharactersPresenter {
 
     public func getMarvelCharacters(initialLoad: Bool = false) {
 
-        guard !retrievingCharacters else { return }
+        guard !endOfData, !retrievingCharacters else { return }
         retrievingCharacters = true
         view?.notifyRequestStart()
 
@@ -44,7 +46,6 @@ class CharactersPresenter {
             let privateKey = BundleUtils.sharedInstance.retrieveString(key: InfoPlistConstants.kMarvelPrivateKey),
             let hash = createHash("\(timestamp)\(privateKey)\(publicKey)")
         else {
-            // TODO
             fatalError("The app can't run because there are no valid credentials to retrieve the required data")
         }
 
@@ -57,7 +58,7 @@ class CharactersPresenter {
             URLQueryItem(name: NetworkConstants.kTimestampParam, value: timestamp),
         ]
         guard let url = components?.url else {
-            //TODO display/throw error
+            self.view?.presentError(NetworkingError.badURL)
             return
         }
         
@@ -69,8 +70,7 @@ class CharactersPresenter {
                 httpResponse.statusCode == 200,
                 error == nil
             else {
-                //TODO display/throw error
-
+                self?.view?.presentError(NetworkingError.badRequest)
                 return
             }
 
@@ -79,10 +79,9 @@ class CharactersPresenter {
 
                 self?.view?.presentCharacters(characters: responseWrapper.data.results)
                 self?.retrievingCharacters = false
+                self?.endOfData = responseWrapper.data.results.isEmpty
             } catch {
-                //TODO display/throw error
-
-                print(error)
+                self?.view?.presentError(NetworkingError.corruptedData)
             }
         }
 

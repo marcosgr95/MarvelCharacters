@@ -23,6 +23,7 @@
 		6BCA176627C6CA90009B8BB3 /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA176527C6CA90009B8BB3 /* CryptoUtils.swift */; };
 		6BCA176827C6CCAA009B8BB3 /* CharacterListViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA176727C6CCAA009B8BB3 /* CharacterListViewController+TableView.swift */; };
 		6BCA176A27C6D14E009B8BB3 /* APIDataWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA176927C6D14E009B8BB3 /* APIDataWrappers.swift */; };
+		6BCA176C27C8035C009B8BB3 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA176B27C8035C009B8BB3 /* CustomErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		6BCA176527C6CA90009B8BB3 /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
 		6BCA176727C6CCAA009B8BB3 /* CharacterListViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterListViewController+TableView.swift"; sourceTree = "<group>"; };
 		6BCA176927C6D14E009B8BB3 /* APIDataWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataWrappers.swift; sourceTree = "<group>"; };
+		6BCA176B27C8035C009B8BB3 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 				6BCA176127C6C5CA009B8BB3 /* BundleUtils.swift */,
 				6BCA176327C6C8A4009B8BB3 /* Constants.swift */,
 				6BCA176527C6CA90009B8BB3 /* CryptoUtils.swift */,
+				6BCA176B27C8035C009B8BB3 /* CustomErrors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				6BCA175B27C6C3A9009B8BB3 /* CharacterListViewController.swift in Sources */,
 				6BCA176827C6CCAA009B8BB3 /* CharacterListViewController+TableView.swift in Sources */,
 				6BCA176627C6CA90009B8BB3 /* CryptoUtils.swift in Sources */,
+				6BCA176C27C8035C009B8BB3 /* CustomErrors.swift in Sources */,
 				6BCA172627C6C305009B8BB3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

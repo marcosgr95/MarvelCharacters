@@ -18,6 +18,7 @@ extension CharacterListViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = characters[indexPath.row].name
+        cell.textLabel?.font = UIFont.muktaMedium()
         return cell
     }
 

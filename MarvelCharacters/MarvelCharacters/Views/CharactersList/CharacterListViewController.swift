@@ -38,12 +38,31 @@ class CharacterListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        createRefreshControl()
     }
 
     // MARK: - Styles
 
     func applyStyles() {
         title = "Marvel Characters"
+    }
+
+    // MARK: - Private methods
+
+    private func createRefreshControl() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    }
+
+    @objc private func handleRefreshControl() {
+        characters = []
+        tableView.reloadData()
+        
+        presenter.getMarvelCharacters(initialLoad: true)
+
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
 
 }

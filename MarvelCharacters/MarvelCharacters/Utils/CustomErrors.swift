@@ -11,4 +11,5 @@ enum NetworkingError: Error {
     case badRequest
     case badURL
     case corruptedData
+    case noLink
 }

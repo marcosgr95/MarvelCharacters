@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol CharacterPresenterDelegate: MarvelAPIDelegate {
     func presentCharacter(_ character: MarvelCharacter?)
@@ -57,6 +58,26 @@ class CharacterPresenter: MarvelAPIPresenter {
 
         task.resume()
 
+    }
+
+    public func showCharacterInBrowser(_ character: MarvelCharacter, linkType: MarvelURLWrapper.URLType) throws {
+
+        guard let selectedURL = character.marvelURLs.filter({ $0.type == linkType.rawValue }).first?.url else {
+            throw NetworkingError.noLink
+        }
+
+        let (publicKey, hash, timestamp) = createMandatoryMarvelAPIParams()
+
+        var components = URLComponents(string: selectedURL)
+        components?.queryItems = [
+            URLQueryItem(name: NetworkConstants.kApiKeyParam, value: publicKey),
+            URLQueryItem(name: NetworkConstants.kHashParam, value: hash),
+            URLQueryItem(name: NetworkConstants.kTimestampParam, value: timestamp),
+        ]
+        guard let resourceURI = components?.url else {
+            throw NetworkingError.badURL
+        }
+        UIApplication.shared.open(resourceURI)
     }
 
     // MARK: - Override methods

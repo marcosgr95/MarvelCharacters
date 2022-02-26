@@ -14,8 +14,11 @@
                 <outlet property="characterDescription" destination="xcH-Mw-TqY" id="WyN-Hu-uXb"/>
                 <outlet property="characterName" destination="xwc-It-YVX" id="Lgh-Gn-iPF"/>
                 <outlet property="characterThumbnail" destination="wHW-FB-ogT" id="Dpq-CW-x87"/>
+                <outlet property="comicURLButton" destination="fgB-fY-xge" id="Ku0-QN-v48"/>
+                <outlet property="detailURLButton" destination="Agk-13-aEB" id="yRf-yz-ix2"/>
                 <outlet property="scrollView" destination="z3Z-jJ-vDj" id="UF1-6o-cSp"/>
                 <outlet property="view" destination="U7E-71-8AL" id="Uc8-Vb-udZ"/>
+                <outlet property="wikiURLButton" destination="WO2-ij-OOZ" id="J4g-v6-vU4"/>
                 <outletCollection property="characterLabels" destination="xcH-Mw-TqY" collectionClass="NSMutableArray" id="EtO-tA-OfG"/>
                 <outletCollection property="characterLabels" destination="xwc-It-YVX" collectionClass="NSMutableArray" id="bgb-UV-Yh7"/>
             </connections>
@@ -32,10 +35,10 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGM-T2-aG2">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="685"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="754"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="JlE-7p-Kwm">
-                                    <rect key="frame" x="25" y="30" width="364" height="625"/>
+                                    <rect key="frame" x="25" y="30" width="364" height="694"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-It-YVX">
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="20.5"/>
@@ -60,8 +63,53 @@
                                                 <constraint firstAttribute="bottom" secondItem="wHW-FB-ogT" secondAttribute="bottom" id="wG2-i8-FDK"/>
                                             </constraints>
                                         </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="dyI-5y-wBa">
+                                            <rect key="frame" x="0.0" y="320.5" width="364" height="44"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agk-13-aEB">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Agk-13-aEB" secondAttribute="height" multiplier="1:1" id="4PZ-vC-KlH"/>
+                                                        <constraint firstAttribute="width" constant="44" id="JAu-Ey-DJU"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="link.circle" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="tapDetailURLButton" destination="-1" eventType="touchUpInside" id="oRn-zN-luA"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WO2-ij-OOZ">
+                                                    <rect key="frame" x="160" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="WO2-ij-OOZ" secondAttribute="height" multiplier="1:1" id="Aan-GV-lHX"/>
+                                                        <constraint firstAttribute="width" constant="44" id="PxS-pd-Hhz"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="globe" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="tapWikiURLButton" destination="-1" eventType="touchUpInside" id="FPm-Cg-qXx"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgB-fY-xge">
+                                                    <rect key="frame" x="320" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="fgB-fY-xge" secondAttribute="height" multiplier="1:1" id="FvD-5U-GGZ"/>
+                                                        <constraint firstAttribute="width" constant="44" id="VFz-CR-Pfy"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="book.circle" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="tapComicURLButton" destination="-1" eventType="touchUpInside" id="7YE-zv-Ju7"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WO2-ij-OOZ" firstAttribute="width" secondItem="WO2-ij-OOZ" secondAttribute="height" multiplier="1:1" id="4HU-S7-9ao"/>
+                                                <constraint firstItem="fgB-fY-xge" firstAttribute="width" secondItem="fgB-fY-xge" secondAttribute="height" multiplier="1:1" id="gmi-vv-5Pj"/>
+                                            </constraints>
+                                        </stackView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcH-Mw-TqY">
-                                            <rect key="frame" x="0.0" y="320.5" width="364" height="304.5"/>
+                                            <rect key="frame" x="0.0" y="389.5" width="364" height="304.5"/>
                                             <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget iaculis urna, eu semper leo. Vestibulum accumsan metus ut lorem scelerisque convallis. Aenean congue maximus risus. Curabitur libero ipsum, blandit laoreet sapien non, mollis maximus elit. Quisque volutpat sollicitudin augue vel varius. Maecenas vel justo vitae justo sollicitudin accumsan vel ut ex. Fusce vestibulum dui vitae elit ullamcorper, nec facilisis libero volutpat. Aenean vel magna vel lectus lacinia hendrerit. Nullam molestie ipsum eget suscipit finibus. Aenean venenatis nisl laoreet leo ornare aliquet. Cras eu ligula leo.
 
 </mutableString>
@@ -107,6 +155,9 @@
         </view>
     </objects>
     <resources>
+        <image name="book.circle" catalog="system" width="128" height="121"/>
+        <image name="globe" catalog="system" width="128" height="121"/>
+        <image name="link.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

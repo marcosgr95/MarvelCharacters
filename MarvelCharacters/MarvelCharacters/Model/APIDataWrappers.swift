@@ -16,3 +16,12 @@ struct ResponseWrapper: Decodable {
 struct DataWrapper: Decodable {
     var results: [MarvelCharacter]
 }
+
+struct MarvelURLWrapper: Decodable {
+    var type: String
+    var url: String
+
+    enum URLType: String {
+        case wiki, comiclink, detail
+    }
+}

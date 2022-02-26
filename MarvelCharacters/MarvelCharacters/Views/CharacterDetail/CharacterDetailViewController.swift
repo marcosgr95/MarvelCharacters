@@ -17,6 +17,9 @@ class CharacterDetailViewController: UIViewController {
     @IBOutlet var characterThumbnail: UIImageView!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var characterLabels: [UILabel]!
+    @IBOutlet var detailURLButton: UIButton!
+    @IBOutlet var wikiURLButton: UIButton!
+    @IBOutlet var comicURLButton: UIButton!
 
     // MARK: - Variables
 
@@ -43,22 +46,65 @@ class CharacterDetailViewController: UIViewController {
         manageLoadingView()
         presenter.getMarvelCharacter(String(character.id))
         applyStyles()
+        configureNavigationBar()
     }
 
     // MARK: - Style methods
 
-    func applyStyles() {
+    private func applyStyles() {
         characterLabels.forEach({ $0.font = UIFont.muktaMedium() })
+    }
+
+    private func configureNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            style: .plain,
+            target: self,
+            action: #selector(shareInfo)
+        )
     }
 
     // MARK: - Private methods
 
-    func manageLoadingView(show: Bool = true) {
+    private func manageLoadingView(show: Bool = true) {
         activityIndicator.isHidden = !show
         show ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
         scrollView.isHidden = show
     }
 
+    @objc private func shareInfo() {
+        let activityViewController = UIActivityViewController(activityItems: [characterThumbnail.image as Any], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.excludedActivityTypes = [ .postToFacebook, .addToReadingList, .postToFlickr ]
+        self.present(activityViewController, animated: true, completion: nil)
+
+    }
+
+    private func tapLinkButton(_ linkType: MarvelURLWrapper.URLType) {
+        do {
+            try presenter.showCharacterInBrowser(character, linkType: linkType)
+        } catch NetworkingError.noLink {
+            //TODO
+        } catch NetworkingError.badURL {
+            //TODO
+        } catch {
+            print("Unexpected error: \(error)")
+        }
+    }
+
+    // MARK: - IBActions
+
+    @IBAction func tapDetailURLButton() {
+        tapLinkButton(.detail)
+    }
+
+    @IBAction func tapWikiURLButton() {
+        tapLinkButton(.wiki)
+    }
+
+    @IBAction func tapComicURLButton() {
+        tapLinkButton(.comiclink)
+    }
 }
 
 extension CharacterDetailViewController: CharacterPresenterDelegate {

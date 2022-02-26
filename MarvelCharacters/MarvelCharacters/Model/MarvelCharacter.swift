@@ -7,16 +7,37 @@
 
 import Foundation
 
-struct MarvelCharacter: Codable {
+struct MarvelCharacter: Decodable {
 
     var id: UInt64
     var name: String
     var descriptionText: String
+    var thumbnailPath: String
+    var thumbnailExtension: String
+
+    var thumbnail: URL? {
+        URL(string: "\(thumbnailPath)/\(NetworkConstants.kStandardLargeThumbnail).\(thumbnailExtension)")
+    }
 
     enum CodingKeys: String, CodingKey {
         case id
         case name
         case descriptionText = "description"
+        case thumbnail
+        case path
+        case `extension`
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(UInt64.self, forKey: .id)
+        name = try values.decode(String.self, forKey: .name)
+        descriptionText = try values.decode(String.self, forKey: .descriptionText)
+
+        let thumbnailWrapper = try values.nestedContainer(keyedBy: CodingKeys.self, forKey: .thumbnail)
+        thumbnailPath = try thumbnailWrapper.decode(String.self, forKey: .path)
+        thumbnailPath = thumbnailPath.replacingOccurrences(of: "http://", with: "https://")
+        thumbnailExtension = try thumbnailWrapper.decode(String.self, forKey: .`extension`)
     }
     
 }

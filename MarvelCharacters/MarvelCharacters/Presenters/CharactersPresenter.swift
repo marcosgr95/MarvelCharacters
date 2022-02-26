@@ -8,13 +8,17 @@
 import Foundation
 import UIKit
 
-protocol CharactersPresenterDelegate: AnyObject {
-    func notifyRequestStart()
-    func presentCharacters(characters: [MarvelCharacter])
+protocol MarvelAPIDelegate: AnyObject {
     func presentError(_ error: NetworkingError)
 }
 
-class CharactersPresenter {
+protocol CharactersPresenterDelegate: MarvelAPIDelegate {
+    func notifyRequestStart()
+    func presentDetail(character: MarvelCharacter)
+    func presentCharacters(characters: [MarvelCharacter])
+}
+
+class CharactersPresenter: MarvelAPIPresenter {
 
     // MARK: - Variables
 
@@ -39,15 +43,7 @@ class CharactersPresenter {
             addPage()
         }
 
-        let timestamp = "\(Date().timeIntervalSince1970)"
-
-        guard
-            let publicKey = BundleUtils.sharedInstance.retrieveString(key: InfoPlistConstants.kMarvelPublicKey),
-            let privateKey = BundleUtils.sharedInstance.retrieveString(key: InfoPlistConstants.kMarvelPrivateKey),
-            let hash = createHash("\(timestamp)\(privateKey)\(publicKey)")
-        else {
-            fatalError("The app can't run because there are no valid credentials to retrieve the required data")
-        }
+        let (publicKey, hash, timestamp) = createMandatoryMarvelAPIParams()
 
         var components = URLComponents(string: NetworkConstants.kCharactersEndpoint)
         components?.queryItems = [
@@ -88,15 +84,17 @@ class CharactersPresenter {
         task.resume()
     }
 
-    public func setDelegate(_ delegate: CharactersPresenterDelegate) {
-        self.view = delegate
+    public func presentDetail(character: MarvelCharacter) {
+        view?.presentDetail(character: character)
+    }
+
+    // MARK: - Override methods
+
+    override public func setDelegate(_ delegate: MarvelAPIDelegate) {
+        self.view = delegate as? CharactersPresenterDelegate
     }
 
     // MARK: - Private methods
-
-    private func createHash(_ string: String) -> String? {
-        return CryptoUtils.sharedInstance.MD5(string)
-    }
 
     private func addPage() {
         page += 1

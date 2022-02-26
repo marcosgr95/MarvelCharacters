@@ -69,6 +69,12 @@ class CharacterListViewController: UIViewController {
 
 extension CharacterListViewController: CharactersPresenterDelegate {
 
+    func presentDetail(character: MarvelCharacter) {
+        let detailVC = CharacterDetailViewController(character: character)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+
+
     func presentCharacters(characters: [MarvelCharacter]) {
         DispatchQueue.main.async {
             self.characters.append(contentsOf: characters)

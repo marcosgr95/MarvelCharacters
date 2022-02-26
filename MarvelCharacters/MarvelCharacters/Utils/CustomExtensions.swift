@@ -19,3 +19,23 @@ extension UIFont {
         return UIFontMetrics.default.scaledFont(for: redressedRegularFont)
     }
 }
+
+extension UIImageView {
+
+    static var defaultImage: UIImage? {
+        UIImage(systemName: "photo")?.withTintColor(.lightGray)
+    }
+
+    func load(url: URL) {
+        self.image = UIImageView.defaultImage
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
+}

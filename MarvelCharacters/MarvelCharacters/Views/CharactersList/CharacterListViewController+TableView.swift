@@ -19,11 +19,13 @@ extension CharacterListViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = characters[indexPath.row].name
         cell.textLabel?.font = UIFont.muktaMedium()
+        cell.accessoryType = .detailDisclosureButton
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.presentDetail(character: characters[indexPath.row])
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

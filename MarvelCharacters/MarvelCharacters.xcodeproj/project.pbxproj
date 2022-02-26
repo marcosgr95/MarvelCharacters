@@ -26,6 +26,10 @@
 		6BCA176C27C8035C009B8BB3 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA176B27C8035C009B8BB3 /* CustomErrors.swift */; };
 		6BCA177127C80FF2009B8BB3 /* CustomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA177027C80FF2009B8BB3 /* CustomExtensions.swift */; };
 		6BCA177327C81152009B8BB3 /* Mukta-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA177227C81152009B8BB3 /* Mukta-Medium.ttf */; };
+		6BCA177527CA3CD9009B8BB3 /* CharacterDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BCA177427CA3CD9009B8BB3 /* CharacterDetail.xib */; };
+		6BCA177727CA3CEB009B8BB3 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA177627CA3CEB009B8BB3 /* CharacterDetailViewController.swift */; };
+		6BCA177927CA4835009B8BB3 /* CharacterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA177827CA4835009B8BB3 /* CharacterPresenter.swift */; };
+		6BCA177B27CA4988009B8BB3 /* MarvelAPIPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCA177A27CA4988009B8BB3 /* MarvelAPIPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +73,10 @@
 		6BCA176B27C8035C009B8BB3 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 		6BCA177027C80FF2009B8BB3 /* CustomExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtensions.swift; sourceTree = "<group>"; };
 		6BCA177227C81152009B8BB3 /* Mukta-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Medium.ttf"; sourceTree = "<group>"; };
+		6BCA177427CA3CD9009B8BB3 /* CharacterDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterDetail.xib; sourceTree = "<group>"; };
+		6BCA177627CA3CEB009B8BB3 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
+		6BCA177827CA4835009B8BB3 /* CharacterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterPresenter.swift; sourceTree = "<group>"; };
+		6BCA177A27CA4988009B8BB3 /* MarvelAPIPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAPIPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +189,8 @@
 		6BCA175627C6C328009B8BB3 /* CharacterDetail */ = {
 			isa = PBXGroup;
 			children = (
+				6BCA177427CA3CD9009B8BB3 /* CharacterDetail.xib */,
+				6BCA177627CA3CEB009B8BB3 /* CharacterDetailViewController.swift */,
 			);
 			path = CharacterDetail;
 			sourceTree = "<group>";
@@ -189,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				6BCA175C27C6C440009B8BB3 /* CharactersPresenter.swift */,
+				6BCA177827CA4835009B8BB3 /* CharacterPresenter.swift */,
+				6BCA177A27CA4988009B8BB3 /* MarvelAPIPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -319,6 +331,7 @@
 			files = (
 				6BCA177327C81152009B8BB3 /* Mukta-Medium.ttf in Resources */,
 				6BCA173027C6C307009B8BB3 /* LaunchScreen.storyboard in Resources */,
+				6BCA177527CA3CD9009B8BB3 /* CharacterDetail.xib in Resources */,
 				6BCA175927C6C369009B8BB3 /* CharacterList.storyboard in Resources */,
 				6BCA172D27C6C307009B8BB3 /* Assets.xcassets in Resources */,
 			);
@@ -346,13 +359,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BCA177127C80FF2009B8BB3 /* CustomExtensions.swift in Sources */,
+				6BCA177B27CA4988009B8BB3 /* MarvelAPIPresenter.swift in Sources */,
 				6BCA175D27C6C440009B8BB3 /* CharactersPresenter.swift in Sources */,
 				6BCA175F27C6C50E009B8BB3 /* MarvelCharacter.swift in Sources */,
 				6BCA176A27C6D14E009B8BB3 /* APIDataWrappers.swift in Sources */,
 				6BCA172427C6C305009B8BB3 /* AppDelegate.swift in Sources */,
 				6BCA176227C6C5CA009B8BB3 /* BundleUtils.swift in Sources */,
+				6BCA177927CA4835009B8BB3 /* CharacterPresenter.swift in Sources */,
 				6BCA176427C6C8A4009B8BB3 /* Constants.swift in Sources */,
 				6BCA175B27C6C3A9009B8BB3 /* CharacterListViewController.swift in Sources */,
+				6BCA177727CA3CEB009B8BB3 /* CharacterDetailViewController.swift in Sources */,
 				6BCA176827C6CCAA009B8BB3 /* CharacterListViewController+TableView.swift in Sources */,
 				6BCA176627C6CA90009B8BB3 /* CryptoUtils.swift in Sources */,
 				6BCA176C27C8035C009B8BB3 /* CustomErrors.swift in Sources */,

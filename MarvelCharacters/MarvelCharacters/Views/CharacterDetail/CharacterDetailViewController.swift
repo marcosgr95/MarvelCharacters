@@ -51,6 +51,14 @@ class CharacterDetailViewController: UIViewController {
         presenter.getMarvelCharacter(String(character.id))
         applyStyles()
         configureNavigationBar()
+        setUpAccessibilityIdentifiers()
+    }
+
+    // MARK: - Accessibility methods
+
+    private func setUpAccessibilityIdentifiers() {
+        activityIndicator.accessibilityIdentifier = AccessibilityLabels.CharacterDetail.activityIndicator
+        characterName.accessibilityIdentifier = AccessibilityLabels.CharacterDetail.characterName
     }
 
     // MARK: - Style methods

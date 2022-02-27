@@ -20,6 +20,7 @@ class CharacterListViewController: UIViewController, CharactersPresenterDelegate
     lazy var paginationOngoingView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
         activityIndicator.color = .white
+        activityIndicator.accessibilityIdentifier = AccessibilityLabels.CharacterList.activityIndicator
         return activityIndicator
     }()
 
@@ -40,6 +41,7 @@ class CharacterListViewController: UIViewController, CharactersPresenterDelegate
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.accessibilityIdentifier = AccessibilityLabels.CharacterList.charactersTableView
         createRefreshControl()
     }
 

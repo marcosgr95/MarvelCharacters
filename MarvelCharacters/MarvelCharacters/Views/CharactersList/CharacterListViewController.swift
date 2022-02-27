@@ -18,7 +18,9 @@ class CharacterListViewController: UIViewController {
     var characters = [MarvelCharacter]()
     let presenter = CharactersPresenter()
     lazy var paginationOngoingView: UIActivityIndicatorView = {
-        return UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
+        activityIndicator.color = .white
+        return activityIndicator
     }()
 
     // MARK: - Lifecycle methods
@@ -45,6 +47,10 @@ class CharacterListViewController: UIViewController {
 
     func applyStyles() {
         title = "Marvel Characters"
+        view.backgroundColor = StylesConstants.marvelAppMainColor
+        tableView.backgroundColor = StylesConstants.marvelAppMainColor
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : UIColor.white, .backgroundColor : StylesConstants.marvelAppMainColor]
+        navigationController?.navigationBar.backgroundColor = StylesConstants.marvelAppMainColor
     }
 
     // MARK: - Private methods

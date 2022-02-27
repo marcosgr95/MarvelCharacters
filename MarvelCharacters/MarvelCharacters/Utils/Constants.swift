@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct NetworkConstants {
 
@@ -25,4 +26,8 @@ struct InfoPlistConstants {
     public static let kMarvelPublicKey: String = "MARVEL_PUBLIC_KEY"
     public static let kMarvelPrivateKey: String = "MARVEL_PRIVATE_KEY"
 
+}
+
+struct StylesConstants {
+    public static let marvelAppMainColor = UIColor(red: 13/255, green: 46/255, blue: 68/255, alpha: 1)
 }

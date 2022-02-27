@@ -74,7 +74,7 @@ class CharacterPresenter: MarvelAPIPresenter {
             URLQueryItem(name: NetworkConstants.kHashParam, value: hash),
             URLQueryItem(name: NetworkConstants.kTimestampParam, value: timestamp),
         ]
-        guard let resourceURI = components?.url else {
+        guard let resourceURI = components?.url, UIApplication.shared.canOpenURL(resourceURI) else {
             throw NetworkingError.badURL
         }
         UIApplication.shared.open(resourceURI)

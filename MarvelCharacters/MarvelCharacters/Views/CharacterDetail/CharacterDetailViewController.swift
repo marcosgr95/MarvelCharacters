@@ -22,6 +22,8 @@ class CharacterDetailViewController: UIViewController {
     @IBOutlet var comicURLButton: UIButton!
     @IBOutlet var appearsInComicsLabel: UILabel!
     @IBOutlet var comicsSV: UIStackView!
+    @IBOutlet var appearsInSeriesLabel: UILabel!
+    @IBOutlet var seriesSV: UIStackView!
 
     // MARK: - Variables
 
@@ -54,8 +56,14 @@ class CharacterDetailViewController: UIViewController {
     // MARK: - Style methods
 
     private func applyStyles() {
-        characterLabels.forEach({ $0.font = UIFont.muktaMedium() })
+        view.backgroundColor = StylesConstants.marvelAppMainColor
+        scrollView.backgroundColor = StylesConstants.marvelAppMainColor
+        characterLabels.forEach { label in
+            label.font = UIFont.muktaMedium()
+            label.textColor = .white
+        }
         appearsInComicsLabel.text = "Appears in the following comics:"
+        appearsInSeriesLabel.text = "Appears in the following series:"
     }
 
     private func configureNavigationBar() {
@@ -95,6 +103,22 @@ class CharacterDetailViewController: UIViewController {
         }
     }
 
+    private func displayStringStack(stackView: UIStackView, strings: [String], listIndicator: String) {
+        if strings.isEmpty {
+            stackView.isHidden = true
+        } else {
+            stackView.isHidden = false
+            for str in strings {
+                let customLabel = UILabel()
+                customLabel.font = UIFont.muktaMedium()
+                customLabel.textColor = .white
+                customLabel.text = "\(listIndicator) \(str)"
+                customLabel.numberOfLines = 0
+                stackView.addArrangedSubview(customLabel)
+            }
+        }
+    }
+
     // MARK: - IBActions
 
     @IBAction func tapDetailURLButton() {
@@ -122,22 +146,14 @@ extension CharacterDetailViewController: CharacterPresenterDelegate {
             self.characterName.text = character.name
             self.characterDescription.text = character.descriptionText
 
-            if character.comics.isEmpty {
-                self.comicsSV.isHidden = true
-            } else {
-                self.comicsSV.isHidden = false
-                for comic in character.comics {
-                    let comicLabel = UILabel()
-                    comicLabel.font = UIFont.muktaMedium()
-                    comicLabel.text = "📚 \(comic)"
-                    self.comicsSV.addArrangedSubview(comicLabel)
-                }
-            }
+            self.displayStringStack(stackView: self.comicsSV, strings: character.comics, listIndicator: "📕")
+            self.displayStringStack(stackView: self.seriesSV, strings: character.series, listIndicator: "📚")
+
+            self.manageLoadingView(show: false)
 
             guard let thumbnail = character.thumbnail else { return }
             self.characterThumbnail.load(url: thumbnail)
 
-            self.manageLoadingView(show: false)
         }
     }
 

@@ -19,7 +19,10 @@ extension CharacterListViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = characters[indexPath.row].name
         cell.textLabel?.font = UIFont.muktaMedium()
-        cell.accessoryType = .detailDisclosureButton
+        cell.textLabel?.textColor = .white
+        cell.accessoryType = .detailButton
+        cell.backgroundColor = StylesConstants.marvelAppMainColor
+        cell.tintColor = .white
         return cell
     }
 

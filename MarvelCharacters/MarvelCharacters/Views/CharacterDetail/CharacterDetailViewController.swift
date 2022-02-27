@@ -72,6 +72,7 @@ class CharacterDetailViewController: UIViewController {
         }
         appearsInComicsLabel.text = "Appears in the following comics:"
         appearsInSeriesLabel.text = "Appears in the following series:"
+        characterThumbnail.layer.cornerRadius = 5
     }
 
     private func configureNavigationBar() {

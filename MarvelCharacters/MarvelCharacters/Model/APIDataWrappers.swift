@@ -17,6 +17,10 @@ struct DataWrapper: Decodable {
     var results: [MarvelCharacter]
 }
 
+struct ItemWrapper: Decodable {
+    var name: String
+}
+
 struct MarvelURLWrapper: Decodable {
     var type: String
     var url: String

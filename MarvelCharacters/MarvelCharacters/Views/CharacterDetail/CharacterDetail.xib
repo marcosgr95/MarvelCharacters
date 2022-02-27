@@ -11,16 +11,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CharacterDetailViewController" customModule="MarvelCharacters" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="fzA-fE-Ck2" id="g0F-eX-UBb"/>
+                <outlet property="appearsInComicsLabel" destination="wvL-fQ-beI" id="1JS-3j-aSe"/>
                 <outlet property="characterDescription" destination="xcH-Mw-TqY" id="WyN-Hu-uXb"/>
                 <outlet property="characterName" destination="xwc-It-YVX" id="Lgh-Gn-iPF"/>
                 <outlet property="characterThumbnail" destination="wHW-FB-ogT" id="Dpq-CW-x87"/>
                 <outlet property="comicURLButton" destination="fgB-fY-xge" id="Ku0-QN-v48"/>
+                <outlet property="comicsSV" destination="ixj-LT-SC6" id="VpL-qd-ZWf"/>
                 <outlet property="detailURLButton" destination="Agk-13-aEB" id="yRf-yz-ix2"/>
                 <outlet property="scrollView" destination="z3Z-jJ-vDj" id="UF1-6o-cSp"/>
                 <outlet property="view" destination="U7E-71-8AL" id="Uc8-Vb-udZ"/>
                 <outlet property="wikiURLButton" destination="WO2-ij-OOZ" id="J4g-v6-vU4"/>
                 <outletCollection property="characterLabels" destination="xcH-Mw-TqY" collectionClass="NSMutableArray" id="EtO-tA-OfG"/>
                 <outletCollection property="characterLabels" destination="xwc-It-YVX" collectionClass="NSMutableArray" id="bgb-UV-Yh7"/>
+                <outletCollection property="characterLabels" destination="wvL-fQ-beI" collectionClass="NSMutableArray" id="Uew-N6-rQU"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -35,12 +38,12 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGM-T2-aG2">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="754"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="799.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="JlE-7p-Kwm">
-                                    <rect key="frame" x="25" y="30" width="364" height="694"/>
+                                    <rect key="frame" x="25" y="30" width="364" height="739.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-It-YVX">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-It-YVX" userLabel="Name">
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -108,7 +111,7 @@
                                                 <constraint firstItem="fgB-fY-xge" firstAttribute="width" secondItem="fgB-fY-xge" secondAttribute="height" multiplier="1:1" id="gmi-vv-5Pj"/>
                                             </constraints>
                                         </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcH-Mw-TqY">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcH-Mw-TqY" userLabel="Description">
                                             <rect key="frame" x="0.0" y="389.5" width="364" height="304.5"/>
                                             <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget iaculis urna, eu semper leo. Vestibulum accumsan metus ut lorem scelerisque convallis. Aenean congue maximus risus. Curabitur libero ipsum, blandit laoreet sapien non, mollis maximus elit. Quisque volutpat sollicitudin augue vel varius. Maecenas vel justo vitae justo sollicitudin accumsan vel ut ex. Fusce vestibulum dui vitae elit ullamcorper, nec facilisis libero volutpat. Aenean vel magna vel lectus lacinia hendrerit. Nullam molestie ipsum eget suscipit finibus. Aenean venenatis nisl laoreet leo ornare aliquet. Cras eu ligula leo.
 
@@ -117,6 +120,17 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-LT-SC6" userLabel="ComicsSV">
+                                            <rect key="frame" x="0.0" y="719" width="364" height="20.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvL-fQ-beI" userLabel="AppearsIn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="364" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                 </stackView>
                             </subviews>

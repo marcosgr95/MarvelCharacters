@@ -20,6 +20,8 @@ class CharacterDetailViewController: UIViewController {
     @IBOutlet var detailURLButton: UIButton!
     @IBOutlet var wikiURLButton: UIButton!
     @IBOutlet var comicURLButton: UIButton!
+    @IBOutlet var appearsInComicsLabel: UILabel!
+    @IBOutlet var comicsSV: UIStackView!
 
     // MARK: - Variables
 
@@ -53,6 +55,7 @@ class CharacterDetailViewController: UIViewController {
 
     private func applyStyles() {
         characterLabels.forEach({ $0.font = UIFont.muktaMedium() })
+        appearsInComicsLabel.text = "Appears in the following comics:"
     }
 
     private func configureNavigationBar() {
@@ -118,6 +121,18 @@ extension CharacterDetailViewController: CharacterPresenterDelegate {
             self.title = character.name
             self.characterName.text = character.name
             self.characterDescription.text = character.descriptionText
+
+            if character.comics.isEmpty {
+                self.comicsSV.isHidden = true
+            } else {
+                self.comicsSV.isHidden = false
+                for comic in character.comics {
+                    let comicLabel = UILabel()
+                    comicLabel.font = UIFont.muktaMedium()
+                    comicLabel.text = "📚 \(comic)"
+                    self.comicsSV.addArrangedSubview(comicLabel)
+                }
+            }
 
             guard let thumbnail = character.thumbnail else { return }
             self.characterThumbnail.load(url: thumbnail)

@@ -33,7 +33,7 @@ class CharactersPresenter: MarvelAPIPresenter {
 
     public func getMarvelCharacters(initialLoad: Bool = false) {
 
-        guard !endOfData, !retrievingCharacters else { return }
+        guard !retrievingCharacters else { return }
         retrievingCharacters = true
         view?.notifyRequestStart()
 
@@ -41,6 +41,11 @@ class CharactersPresenter: MarvelAPIPresenter {
             resetPagination()
         } else {
             addPage()
+        }
+
+        guard !endOfData else {
+            view?.presentCharacters(characters: [])
+            return
         }
 
         let (publicKey, hash, timestamp) = createMandatoryMarvelAPIParams()
@@ -104,5 +109,6 @@ class CharactersPresenter: MarvelAPIPresenter {
     private func resetPagination() {
         page = 0
         offset = 0
+        endOfData = false
     }
 }

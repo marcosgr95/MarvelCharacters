@@ -15,19 +15,25 @@ struct MarvelCharacter: Decodable {
     var thumbnailPath: String
     var thumbnailExtension: String
     var marvelURLs: [MarvelURLWrapper]
+    var comics: [String]
 
     var thumbnail: URL? {
         URL(string: "\(thumbnailPath)/\(NetworkConstants.kStandardLargeThumbnail).\(thumbnailExtension)")
     }
 
     enum CodingKeys: String, CodingKey {
+        // 'Base' coding keys
         case id
         case name
         case descriptionText = "description"
+        case marvelURLs = "urls"
+        // Thumbnail coding keys
         case thumbnail
         case path
         case `extension`
-        case marvelURLs = "urls"
+        // Comics coding keys
+        case comics
+        case items
     }
 
     init(from decoder: Decoder) throws {
@@ -41,6 +47,9 @@ struct MarvelCharacter: Decodable {
         thumbnailPath = try thumbnailWrapper.decode(String.self, forKey: .path)
         thumbnailPath = thumbnailPath.replacingOccurrences(of: "http://", with: "https://")
         thumbnailExtension = try thumbnailWrapper.decode(String.self, forKey: .`extension`)
+
+        let comicsWrapper = try values.nestedContainer(keyedBy: CodingKeys.self, forKey: .comics)
+        comics = try comicsWrapper.decode([ItemWrapper].self, forKey: .items).map({ $0.name })
     }
     
 }

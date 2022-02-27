@@ -98,7 +98,7 @@ extension CharacterListViewController: CharactersPresenterDelegate {
     }
 
     func presentError(_ error: NetworkingError) {
-        //TODO show an alert
+        showNetworkingErrorAlert(error)
     }
 
 }

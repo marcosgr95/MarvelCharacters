@@ -27,5 +27,16 @@ struct MarvelURLWrapper: Decodable {
 
     enum URLType: String {
         case wiki, comiclink, detail
+
+        func humanFriendlyDescription() -> String {
+            switch self {
+            case .wiki:
+                return "Wiki"
+            case .comiclink:
+                return "Comic URL"
+            case .detail:
+                return "Marvel website page describing the character"
+            }
+        }
     }
 }

@@ -95,9 +95,9 @@ class CharacterDetailViewController: UIViewController {
         do {
             try presenter.showCharacterInBrowser(character, linkType: linkType)
         } catch NetworkingError.noLink {
-            //TODO
+            showAlert(title: "No link", message: "No \(linkType.humanFriendlyDescription()) was found")
         } catch NetworkingError.badURL {
-            //TODO
+            showAlert(title: "Bad URL", message: "The URL is corrupt")
         } catch {
             print("Unexpected error: \(error)")
         }
@@ -139,7 +139,8 @@ extension CharacterDetailViewController: CharacterPresenterDelegate {
     func presentCharacter(_ character: MarvelCharacter?) {
         DispatchQueue.main.async {
             guard let character = character else {
-                //TODO
+                self.manageLoadingView(show: false)
+                self.showAlert(title: "No character", message: "No character detail was found. Try again later.")
                 return
             }
             self.title = character.name
@@ -158,7 +159,7 @@ extension CharacterDetailViewController: CharacterPresenterDelegate {
     }
 
     func presentError(_ error: NetworkingError) {
-        //TODO
+        showNetworkingErrorAlert(error)
     }
 
 }

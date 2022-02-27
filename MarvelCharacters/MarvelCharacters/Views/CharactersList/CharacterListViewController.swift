@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterListViewController: UIViewController {
+class CharacterListViewController: UIViewController, CharactersPresenterDelegate {
 
     // MARK: - IBOutlets
 
@@ -71,9 +71,7 @@ class CharacterListViewController: UIViewController {
         }
     }
 
-}
-
-extension CharacterListViewController: CharactersPresenterDelegate {
+    // CharactersPresenterDelegate methods
 
     func presentDetail(character: MarvelCharacter) {
         let detailVC = CharacterDetailViewController(character: character)

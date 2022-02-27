@@ -10,24 +10,50 @@ import XCTest
 
 class MarvelCharactersTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testPresentCharacters() throws {
+        let mockPresenter = CharactersPresenterMock(presentUsers: true)
+        let mockView = CharactersViewMock()
+        mockPresenter.setDelegate(mockView)
+        mockPresenter.getMarvelCharacters()
+        XCTAssertTrue(mockView.charactersWereSet, "The characters should have been set")
+        XCTAssertFalse(mockView.errorWasThrown, "No error should have been thrown")
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testPresentError() throws {
+        let mockPresenter = CharactersPresenterMock(presentUsers: false)
+        let mockView = CharactersViewMock()
+        mockPresenter.setDelegate(mockView)
+        mockPresenter.getMarvelCharacters()
+        XCTAssertFalse(mockView.charactersWereSet, "No characters should have been set")
+        XCTAssertTrue(mockView.errorWasThrown, "An error should have been thrown")
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+}
+
+class CharactersPresenterMock: CharactersPresenter {
+
+    private var presentUsers: Bool = true
+
+    init(presentUsers: Bool) {
+        self.presentUsers = presentUsers
+        super.init()
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    override func getMarvelCharacters(initialLoad: Bool = false) {
+        presentUsers ? view?.presentCharacters(characters: []) : view?.presentError(NetworkingError.corruptedData)
+    }
+}
+
+class CharactersViewMock: CharacterListViewController {
+
+    public var charactersWereSet: Bool = false
+    public var errorWasThrown: Bool = false
+
+    override func presentCharacters(characters: [MarvelCharacter]) {
+        charactersWereSet = true
     }
 
+    override func presentError(_ error: NetworkingError) {
+        errorWasThrown = true
+    }
 }
